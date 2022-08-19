@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("title");
             $table->string("excerpt");
             $table->string("body");
+            $table->string("author");
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists("blogs");
     }
 };

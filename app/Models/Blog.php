@@ -12,10 +12,12 @@ class Blog extends Model
     protected $fillable = [
         'title',
         'excerpt',
-        'body'
+        'body',
+        'author',
+        'user_id'
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     public function user()
     {

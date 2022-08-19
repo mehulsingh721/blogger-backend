@@ -22,8 +22,9 @@ class BlogController extends Controller
     public function getUserBlogs(Request $request)
     {
         $userId = $request->query("userId");
+        $user = User::find($userId);
         $blogs = Blog::where("user_id", $userId)->get();
-        return response()->json($blogs, 200);
+        return response()->json(["blogs" => $blogs, "username" => $user->name], 200);
     }
 
     /**
@@ -35,10 +36,12 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $userId = $request->query("userId");
+        $user = User::find($userId);
         $blog = Blog::create([
             "title" => $request->title,
             "excerpt" => $request->excerpt,
             "body" => $request->body,
+            "author" => $user->name,
             "user_id" => $userId
         ]);
         return response()->json($blog, 201);
